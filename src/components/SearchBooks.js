@@ -1,6 +1,7 @@
 import React , {Component} from 'react';
 import {Link} from 'react-router-dom';
-import * as BooksAPI from '../BooksAPI';
+import {DebounceInput} from 'react-debounce-input';
+import * as BooksAPI from '../utils/BooksAPI';
 import PropTypes from 'prop-types';
 import BooksGrid from './BooksGrid';
 import AppHeader from './AppHeader';
@@ -93,12 +94,13 @@ class SearchBooks extends Component{
 
               <div className="card shadow-sm">
                 <div className="card-body">
-                  <input 
+                  <DebounceInput
+                    debounceTimeout={300}
                     className="form-control"
                     type="text"
                     placeholder="Search by title or author"
                     value={query}
-                    onChange={event => this.updateQuery(event.target.value)}
+                    onChange={(event) => this.updateQuery(event.target.value)}
                   />
                 </div>
               </div>
